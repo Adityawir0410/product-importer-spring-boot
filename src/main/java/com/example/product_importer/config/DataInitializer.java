@@ -30,15 +30,12 @@ public class DataInitializer implements CommandLineRunner {
             ObjectMapper objectMapper = new ObjectMapper();
 
             try {
-                // 1. Ambil data JSON dari URL
                 String jsonResponse = restTemplate.getForObject(URL, String.class);
 
-                // 2. Ubah JSON menjadi Objek Java menggunakan DTO
                 ProductResponse productData = objectMapper.readValue(jsonResponse, ProductResponse.class);
 
                 List<Product> productsToSave = new ArrayList<>();
 
-                // 3. Ubah setiap DTO menjadi Entity Product
                 for (ProductDTO dto : productData.getProducts()) {
                     String imageUrl = (!dto.getImages().isEmpty()) ? dto.getImages().get(0).getSrc() : null;
 
@@ -46,7 +43,6 @@ public class DataInitializer implements CommandLineRunner {
                         ? new BigDecimal(dto.getVariants().get(0).getPrice()) 
                         : BigDecimal.ZERO;
 
-                    // Gunakan constructor dari entity Product
                     Product product = new Product(
                             dto.getTitle(),
                             dto.getHandle(),
@@ -57,7 +53,6 @@ public class DataInitializer implements CommandLineRunner {
                     productsToSave.add(product);
                 }
 
-                // 4. Simpan semua produk ke database
                 productRepository.saveAll(productsToSave);
                 System.out.println("SUCCESS: " + productsToSave.size() + " products have been initialized!");
 
