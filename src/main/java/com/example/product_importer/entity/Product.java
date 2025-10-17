@@ -11,9 +11,9 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 @Entity
-@Getter // Otomatis membuat semua getter
-@Setter // Otomatis membuat semua setter
-@NoArgsConstructor // Otomatis membuat constructor kosong
+@Getter
+@Setter 
+@NoArgsConstructor
 public class Product {
 
     @Id
@@ -26,7 +26,6 @@ public class Product {
     private String imageUrl;
     private BigDecimal price;
 
-    // Constructor untuk memudahkan membuat objek baru
     public Product(String name, String handle, String vendor, String imageUrl, BigDecimal price) {
         this.name = name;
         this.handle = handle;

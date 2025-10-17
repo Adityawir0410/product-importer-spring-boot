@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@JsonIgnoreProperties(ignoreUnknown = true) // Ini penting agar tidak error jika ada field di JSON yg tidak kita pakai
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductDTO {
     private String title;
     private String handle;
